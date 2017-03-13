@@ -1,4 +1,4 @@
-## Bridebook UI test excercise
+## Bridebook UI test exercise
 
 ## How to use
 * clone this project
