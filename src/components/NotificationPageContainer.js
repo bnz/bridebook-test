@@ -5,39 +5,16 @@ import * as notificationActions from '../actions/notification-actions';
 import Notification from './Notification';
 
 class NotificationPageContainer extends Component {
-  showErrorNotification = e => {
+  submitForm = e => {
     const { actions } = this.props;
     e.preventDefault();
-    actions.showNotification('error');
-  };
-
-  showWarningNotification = e => {
-    const { actions } = this.props;
-    e.preventDefault();
-    //actions.showNotification('warning');
-  };
-
-  showInfoNotification = e => {
-    const { actions } = this.props;
-    e.preventDefault();
-    //actions.showNotification('info');
-  };
-
-  showSuccessNotification = e => {
-    const { actions } = this.props;
-    e.preventDefault();
-    //actions.showNotification('success');
-  };
-
-  showCustomNotification = e => {
-    const { actions } = this.props;
-    e.preventDefault();
-    //actions.showNotification('custom');
+    actions.submitForm();
   };
 
   render() {
-    const { notification } = this.props;
-    console.log(notification);
+    const { notification, actions, emailField } = this.props;
+    const { changeEmailField } = actions;
+    console.log(emailField);
     return (
       <div>
         <div className="notification-wrapper">
@@ -46,20 +23,9 @@ class NotificationPageContainer extends Component {
             : <em>Notification will appear here</em>}
         </div>
         <div className="notification-triggers">
-          <button className="button" onClick={this.showErrorNotification}>
-            Error
-          </button>
-          <button className="button" onClick={this.showWarningNotification}>
-            Warning
-          </button>
-          <button className="button" onClick={this.showInfoNotification}>
-            Info
-          </button>
-          <button className="button" onClick={this.showSuccessNotification}>
-            Success
-          </button>
-          <button className="button" onClick={this.showCustomNotification}>
-            Custom
+          <input type="text" value={emailField} onChange={changeEmailField} />
+          <button className="button" onClick={this.submitForm}>
+            Submit
           </button>
         </div>
       </div>
@@ -69,12 +35,14 @@ class NotificationPageContainer extends Component {
 
 NotificationPageContainer.propTypes = {
   notification: PropTypes.object,
+  emailField: PropTypes.string.isRequired,
   actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, props) {
   return {
-    notification: state.notification.notification
+    notification: state.notification.notification,
+    emailField: state.notification.emailField
   };
 }
 

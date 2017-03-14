@@ -18,17 +18,31 @@ class App extends Component {
           <div className="container">
             <div className="app-intro">
               <p>
-                Your task is to display different type of noitification when appropriate button is clicked. There are 5 types of notificaitons:
+                Your task is to display different type of noitification when appropriate action is performed:
               </p>
               <ul>
-                <li><em>Error</em></li>
-                <li><em>Warning</em></li>
-                <li><em>Info</em></li>
-                <li><em>Success</em></li>
-                <li><em>Custom HTML</em> (Optional, do this one last)</li>
+                <li>
+                  <em>Error</em>
+                  {' '}
+                  - When email incorrect email is submitted (`hello@bridebook`)
+                </li>
+                <li>
+                  <em>Warning</em>
+                  {' '}- When you have unsaved / unsubmitted input field
+                </li>
+                <li>
+                  <em>Success</em>
+                  {' '}
+                  - When email passed validation after submitting (`hello@bridebook.co.uk` and clear the fields and display success message)
+                </li>
+                <li>
+                  <em>Custom HTML</em>
+                  {' '}
+                  - Add ability to pass custom html to notification box (Optional, do this one last if have time)
+                </li>
               </ul>
               <p>
-                There's an example of action and reducer when you click "error" button. Please refer to designs in "./designs" folder on how notifications should look. Extra points if you use flexbox in your css.
+                There's an example of action and reducer when you start typing in input field, that adds `unsaved` warning notification to store, you just need to display it in Notification.js. Please refer to ROUGH notification designs in "./designs" folder on how notifications should look. Extra points if you use flexbox in your css.
               </p>
               <p>
                 You can use icon font of your choice, icons shouldn't be exactly as in designs. Please try to use colors from "Variables.styl" file.
