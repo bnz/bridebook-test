@@ -1,17 +1,17 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
-node_modules
-
-# production
-build
-
-# misc
 .DS_Store
+.next
+coverage
+node_modules
+node_modules_bak
 npm-debug.log
+yarn-error.log
+newrelic_agent.log
+package-lock.json
+.scannerwork
+.idea/**
+.vscode
+.vscode/**
 
-# typings definitions (used with VS Code)
-typings
+newrelic_agent.log
 
-# jsconfig for intellisense in VS Code
-jsconfig.json
+*.log
