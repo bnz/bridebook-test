@@ -1,57 +1,61 @@
-import React, { PropTypes, Component } from 'react';
+// @flow
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as notificationActions from '../actions/notification-actions';
+import { changeEmailField, submitForm } from '../actions/notification-actions';
 import Notification from './Notification';
+import { notificationWrapper } from './NotificationPageContainer.style';
+import Box from '../fela/components/Box';
+import Text from '../fela/components/Text';
+import Button from './Button';
+import Input from './input/input';
 
-class NotificationPageContainer extends Component {
-  submitForm = e => {
-    const { actions } = this.props;
-    e.preventDefault();
-    actions.submitForm();
-  };
-
-  render() {
-    const { notification, actions, emailField } = this.props;
-    const { changeEmailField } = actions;
-    console.log(emailField);
-    return (
-      <div>
-        <div className="notification-wrapper">
-          {notification
-            ? <Notification notification={notification} />
-            : <em>Notification will appear here</em>}
-        </div>
-        <div className="notification-triggers">
-          <input type="text" value={emailField} onChange={changeEmailField} />
-          <button className="button" onClick={this.submitForm}>
-            Submit
-          </button>
-        </div>
-      </div>
-    );
-  }
-}
-
-NotificationPageContainer.propTypes = {
-  notification: PropTypes.object,
-  emailField: PropTypes.string.isRequired,
-  actions: PropTypes.object.isRequired
+type PropTypes = {
+  notification: Object,
+  emailField: string,
+  actions: Object,
 };
 
-function mapStateToProps(state, props) {
-  return {
+const NotificationPageContainer = ({
+  submitForm,
+  emailField,
+  notification,
+  changeEmailField,
+}) => {
+  const submitTestForm = e => {
+    e.preventDefault();
+    submitForm();
+  };
+
+  return (
+    <Box>
+      <Box style={notificationWrapper}>
+        {notification ? (
+          <Notification notification={notification} />
+        ) : (
+          <Text as="em">Notification will appear here</Text>
+        )}
+      </Box>
+      <Box
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Box style={{ marginRight: '8px' }}>
+          <Input type="text" value={emailField} onChange={changeEmailField} />
+        </Box>
+
+        <Button theme="primary" text="Submit" onClick={submitTestForm} />
+      </Box>
+    </Box>
+  );
+};
+
+export default connect(
+  state => ({
     notification: state.notification.notification,
-    emailField: state.notification.emailField
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(notificationActions, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  NotificationPageContainer
-);
+    emailField: state.notification.emailField,
+  }),
+  { changeEmailField, submitForm },
+)(NotificationPageContainer);

@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './index.css';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import FelaProvider from './fela/FelaProvider';
 import configureStore from './store/configure-store';
 
 const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <FelaProvider>
+      <App />
+    </FelaProvider>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
+
+module.hot.accept();

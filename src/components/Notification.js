@@ -1,35 +1,17 @@
-import React, { PropTypes, Component } from 'react';
+// @flow
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as notificationActions from '../actions/notification-actions';
+// import { closeNotification } from '../actions/notification-actions';
 
-class Notification extends Component {
-  render() {
-    const { notification } = this.props;
-
-    return (
-      <div>
-        Add notification code here
-      </div>
-    );
-  }
-}
-
-Notification.propTypes = {
-  notification: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+type PropTypes = {
+  notification: Object,
 };
 
-function mapStateToProps(state, props) {
-  return {
-    notification: state.notification.notification
-  };
-}
+const Notification = ({ notification }: PropTypes) => (
+  <div>Add notification code here</div>
+);
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(notificationActions, dispatch)
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Notification);
+export default connect(state => ({
+  notification: state.notification.notification,
+}))(Notification);
