@@ -8,7 +8,7 @@ const generateNotification = type => {
         type,
         text: 'Error Error Danger!',
         buttonText: '',
-        customHtml: null
+        customHtml: null,
       };
       break;
     case 'warning':
@@ -16,7 +16,7 @@ const generateNotification = type => {
         type,
         text: 'WARNING YOU HAVE UNSAVED CHANGES!',
         buttonText: '',
-        customHtml: null
+        customHtml: null,
       };
       break;
   }
@@ -28,7 +28,7 @@ export const showNotification = type => {
   const notification = generateNotification(type);
   return {
     type: types.SHOW_NOTIFICATION,
-    payload: notification
+    payload: notification,
   };
 };
 
@@ -43,8 +43,9 @@ export const submitForm = () => {
 export const changeEmailField = e => {
   const { value } = e.target;
   const notification = value ? generateNotification('warning') : null;
+  console.log(value, notification);
   return {
     type: types.CHANGE_EMAIL_FIELD,
-    payload: { emailField: value, notification }
+    payload: { emailField: value, notification },
   };
 };

@@ -1,4 +1,4 @@
-import './Logo.styl';
+// import './Logo.styl';
 import React, { Component } from 'react';
 
 export default class Logo extends Component {
@@ -8,8 +8,7 @@ export default class Logo extends Component {
         className="logo-heart"
         width="29px"
         height="29px"
-        viewBox="0 0 29 29"
-      >
+        viewBox="0 0 29 29">
         <g id="Supplier-Sign-Up-2" stroke="none" strokeWidth="1" fill="none">
           <g id="Page-1">
             <mask id="mask-2" fill="white">
