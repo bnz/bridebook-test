@@ -2,6 +2,11 @@ import * as types from './action-types';
 
 const generateNotification = type => {
   let notification = null;
+
+  if (!type) {
+    return notification;
+  }
+
   switch (type) {
     case 'error':
       notification = {
@@ -19,8 +24,15 @@ const generateNotification = type => {
         customHtml: null,
       };
       break;
+    case 'success':
+      notification = {
+        type,
+        text: 'SUCCESS!!!1 you made it! (^_-)',
+        buttonText: '',
+        customHtml: null,
+      }
+      break;
   }
-  /* TO IMPLEMENT OTHER CASES */
   return notification;
 };
 
@@ -32,18 +44,17 @@ export const showNotification = type => {
   };
 };
 
-export const hideNotification = type => {
-  /* TO IMPLEMENT */
-};
+export const hideNotification = () => showNotification()
 
-export const submitForm = () => {
-  /* TO IMPLEMENT */
+const validateEmail = email => /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
+
+export const submitForm = email => {
+  return showNotification(validateEmail(email) ? 'success' : 'error')
 };
 
 export const changeEmailField = e => {
   const { value } = e.target;
   const notification = value ? generateNotification('warning') : null;
-  console.log(value, notification);
   return {
     type: types.CHANGE_EMAIL_FIELD,
     payload: { emailField: value, notification },

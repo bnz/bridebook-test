@@ -24,7 +24,7 @@ const NotificationPageContainer = ({
 }) => {
   const submitTestForm = e => {
     e.preventDefault();
-    submitForm();
+    submitForm(emailField); // I passed entered string to submit action. is it ok?
   };
 
   return (
